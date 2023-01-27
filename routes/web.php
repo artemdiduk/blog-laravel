@@ -5,6 +5,7 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Auth\RegisrationController;
+use App\Http\Controllers\CreatorContentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,3 +28,4 @@ Route::get('login', [LoginController::class, 'show'])->name('login');
 Route::get('registration', [RegisrationController::class, 'show'])->name('registration');
 Route::post('authenticate', [LoginController::class, 'authenticate'])->name('authenticate');
 Route::post('register', [RegisrationController::class, 'register'])->name('register');
+Route::post('group/create', [CreatorContentController::class, 'createGroup'])->name('group.create');

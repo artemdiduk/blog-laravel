@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Role;
+use App\Models\Group;
+use App\Models\Post;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -48,4 +50,15 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Role::class,'user_roles', 'user_id', 'role_id');
     }
+    
+    public function posts() {
+      return $this->hasMany(Post::class);
+
+    }
+    public function group()
+    {
+        return $this->hasMany(Group::class);
+    }
+    
+    
 }

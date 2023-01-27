@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 class AdminController extends Controller
 {
     public function show() {
-        dd ('das');
+        
+        return view('pages.admin-homepage');
     }
 }

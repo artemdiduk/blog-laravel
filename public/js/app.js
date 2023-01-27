@@ -2060,8 +2060,8 @@ module.exports = {
   \*****************************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 __webpack_require__(/*! ./jquery.min.js */ "./resources/js/jquery.min.js");
+__webpack_require__(/*! ./bootstrap.js */ "./resources/js/bootstrap.js");
 __webpack_require__(/*! ./popper.js */ "./resources/js/popper.js");
 __webpack_require__(/*! ./main.js */ "./resources/js/main.js");
 
