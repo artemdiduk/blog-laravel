@@ -8,6 +8,11 @@ use App\Models\Post;
 use App\Models\User;
 class Group extends Model
 {
+    protected $fillable = [
+        'name',
+        'slag',
+        'user_id'
+    ];
     use HasFactory;
 
     public function posts() {

@@ -1,19 +1,18 @@
-(function ($) {
-
-    "use strict";
-
-    var fullHeight = function () {
-
-        $('.js-fullheight').css('height', $(window).height());
-        $(window).resize(function () {
-            $('.js-fullheight').css('height', $(window).height());
+document.addEventListener('DOMContentLoaded', () => {
+    let btnFormActive = document.querySelector(".btn.btn-primary.create");
+    let form = document.getElementById("exampleModal");
+    let btnClose = document.getElementById("btn-close");
+    if (form) {
+        btnFormActive.addEventListener("click", () => {
+            form.classList.add("show");
+            form.style.display = "block";
         });
+    }
+    if (form) {
+        btnClose.addEventListener("click", () => {
+            form.classList.remove("show");
+            form.style.display = "none";
+        });
+    }
 
-    };
-    fullHeight();
-
-    $('#sidebarCollapse').on('click', function () {
-        $('#sidebar').toggleClass('active');
-    });
-
-})(jQuery);
+});

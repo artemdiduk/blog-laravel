@@ -4803,20 +4803,23 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;function _typeof
   \******************************/
 /***/ (() => {
 
-(function ($) {
-  "use strict";
-
-  var fullHeight = function fullHeight() {
-    $('.js-fullheight').css('height', $(window).height());
-    $(window).resize(function () {
-      $('.js-fullheight').css('height', $(window).height());
+document.addEventListener('DOMContentLoaded', function () {
+  var btnFormActive = document.querySelector(".btn.btn-primary.create");
+  var form = document.getElementById("exampleModal");
+  var btnClose = document.getElementById("btn-close");
+  if (form) {
+    btnFormActive.addEventListener("click", function () {
+      form.classList.add("show");
+      form.style.display = "block";
     });
-  };
-  fullHeight();
-  $('#sidebarCollapse').on('click', function () {
-    $('#sidebar').toggleClass('active');
-  });
-})(jQuery);
+  }
+  if (form) {
+    btnClose.addEventListener("click", function () {
+      form.classList.remove("show");
+      form.style.display = "none";
+    });
+  }
+});
 
 /***/ }),
 

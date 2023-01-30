@@ -5,7 +5,8 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Auth\RegisrationController;
-use App\Http\Controllers\CreatorContentController;
+use App\Http\Controllers\GroupController;
+use App\Http\Controllers\ArticleController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,4 +29,6 @@ Route::get('login', [LoginController::class, 'show'])->name('login');
 Route::get('registration', [RegisrationController::class, 'show'])->name('registration');
 Route::post('authenticate', [LoginController::class, 'authenticate'])->name('authenticate');
 Route::post('register', [RegisrationController::class, 'register'])->name('register');
-Route::post('group/create', [CreatorContentController::class, 'createGroup'])->name('group.create');
+Route::post('group/create', [GroupController::class, 'create'])->name('group.create');
+Route::get('{group}', [GroupController::class, 'show'])->name('group');
+Route::get('article/create/form', [ArticleController::class, 'read'])->name('article.create.form');
