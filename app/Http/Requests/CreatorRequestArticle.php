@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreatorRequest extends FormRequest
+class CreatorRequestArticle extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,10 @@ class CreatorRequest extends FormRequest
     public function rules()
     {
         return [
-            'group' => 'unique:App\Models\Group,name|required|min:3|max:200|string',    
+            'group' => 'exists:App\Models\Group,slag|required',
+            'name' => 'unique:App\Models\Post,name|required|min:3|string',
+            'description' => 'required|min:4|max:2000|string',
+            'img' => 'mimes:jpg,png'   
         ];
     }
 }

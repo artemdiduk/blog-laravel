@@ -5,11 +5,13 @@
 @section('content')
 <div class="container">
     <div style="padding-top: 20px;">
+        @if (Auth::check())
         <div class="row justify-content-end">
             <div class="col-md-2">
-                <a class="btn btn-primary" href="{{route('article.create.form')}}">Написать статью</a>
+                <a class="btn btn-primary" href="{{route('article.create.form',  ['group' => $groupSlag])}}">Написать статью</a>
             </div>
         </div>
+        @endif
         <div class="col-md-12">
             <h3 class="display-5">Тема статей {{ $groupName }}</h3>
         </div>
@@ -18,7 +20,7 @@
             <div class="col-md-12 border-bottom">
                 <div class="row">
                     <div class="col-4">
-                        <a href="{{"$groupSlag/$post->slag"}}">{{$post->name}}</a>
+                        <a href="/{{$post->slag}}">{{$post->name}}</a>
                     </div>
                 </div>
             </div>

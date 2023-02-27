@@ -18,7 +18,7 @@ class CreatePostTable extends Migration
             $table->string('name')->unique();
             $table->string('slag')->unique();
             $table->string('description');
-            $table->string('img');
+            $table->string('img')->nullable();
             $table->unsignedBigInteger('group_id');
             $table->unsignedBigInteger('user_id');
             $table->foreign('group_id')->references('id')->on('groups')

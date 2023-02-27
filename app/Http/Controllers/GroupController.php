@@ -9,14 +9,16 @@ use Illuminate\Support\Facades\Auth;
 class GroupController extends Controller
 {
     public function show($slugGroup)
-    {
+    {   
+        
         $group = Group::where(['slag' => $slugGroup])->first();
         if ($group) {
             $groupId = $group->id;  
             $posts = Post::with('groups')->where(['group_id' => $groupId])->get();
             return view('pages.group', ['groupName' => $group->name, 'groupSlag' => $group->slag, "posts" => $posts]);
         }
-        abort(404);
+        
+        
     }
     public function create(Group $group, CreatorRequest $request)
     {

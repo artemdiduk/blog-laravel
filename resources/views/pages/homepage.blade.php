@@ -16,7 +16,7 @@
         @foreach ($groups as $group)
             <div class="row">
                 <div class="col-4">
-                    <a href="{{$group->slag}}">{{$group->name}}</a>
+                    <a href="group/{{$group->slag}}">{{$group->name}}</a>
                 </div>
             </div>
         @endforeach

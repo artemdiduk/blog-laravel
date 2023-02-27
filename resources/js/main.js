@@ -14,5 +14,4 @@ document.addEventListener('DOMContentLoaded', () => {
             form.style.display = "none";
         });
     }
-
 });

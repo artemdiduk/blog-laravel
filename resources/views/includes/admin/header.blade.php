@@ -7,7 +7,7 @@
 
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('login')}}">Контент на сайте</a>
+                    <a class="nav-link" href="{{route('login')}}">Контент на сайтеd </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('registration')}}">Юзери</a>

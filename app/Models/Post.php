@@ -9,7 +9,14 @@ use App\Models\User;
 class Post extends Model
 {
     use HasFactory;
-
+    protected $fillable = [
+        'name',
+        'description',
+        'img',
+        'group_id',
+        'slag',
+        'user_id'
+    ];
     public function groups() {
         return $this->belongsTo(Group::class);
     }

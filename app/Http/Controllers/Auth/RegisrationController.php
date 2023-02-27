@@ -23,5 +23,7 @@ class RegisrationController extends Controller
         Auth::login($user);
         $requests->session()->regenerate();
         return redirect()->intended('account');
+        return redirect()->intended('admin');
     }
+    
 }
