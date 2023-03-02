@@ -6,8 +6,19 @@
 <div class="container">
      @if (Auth::id() == $author->id)
         <div class="col-md-2">
-            <button class="btn btn-primary create" data-toggle="modal" data-target="#exampleModal">Изменить саттю</button>
+            <a href="{{route('article.update.form', ['article' => $postSlag])}}" class="btn btn-primary create" data-toggle="modal" data-target="#exampleModal">Изменить саттю</a>
         </div>
+    @endif
+    @if (Auth::id() == $author->id)
+         <form action="{{route("article.delate")}}" method="post" enctype='multipart/form-data'>
+                @csrf
+                <div style="padding-top: 20px;">
+                     <div class="input-group mb-3">
+                         <input type="hidden" name="post_id" id="post_id" value="{{ $postId }}" />
+                        <button class="btn btn-primary">Удалить пост</button>
+                    </div>
+                </div>
+        </form>  
     @endif
     <div style="padding-top: 20px;">
         <div class="col-md-12">

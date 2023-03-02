@@ -20,7 +20,7 @@
             <div class="col-md-12 border-bottom">
                 <div class="row">
                     <div class="col-4">
-                        <a href="/{{$post->slag}}">{{$post->name}}</a>
+                        <a href="/{{$groupSlag}}/{{$post->slag}}">{{$post->name}}</a>
                     </div>
                 </div>
             </div>

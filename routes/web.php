@@ -32,6 +32,8 @@ Route::post('register', [RegisrationController::class, 'register'])->name('regis
 Route::post('group/create', [GroupController::class, 'create'])->name('group.create');
 Route::get('article/create/form', [ArticleController::class, 'read'])->name('article.create.form')->middleware('auth');
 Route::post('article/create', [ArticleController::class, 'create'])->name('article.create');
-Route::post('article/update', [ArticleController::class, 'update'])->name('article.update');
 Route::get('group/{group}', [GroupController::class, 'show'])->name('group');
 Route::get('{groupSlag}/{articleName}', [ArticleController::class, 'show'])->name('article');
+Route::get('article/update/form', [ArticleController::class, 'updateStore'])->name('article.update.form');
+Route::post('article/update', [ArticleController::class, 'update'])->name('article.update')->middleware('author');
+Route::post('article/delate', [ArticleController::class, 'delate'])->name('article.delate')->middleware('author');

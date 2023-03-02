@@ -24,9 +24,9 @@ class UpdateRequestArticle extends FormRequest
     public function rules()
     {
         return [
-            'group' => 'exists:App\Models\Group,slag|required',
-            'name' => 'unique:App\Models\Post,name|required|min:3|string',
-            'description' => 'required|min:4|max:2000|string',
+            'group' => 'exists:App\Models\Group,slag',
+            'name' => 'unique:App\Models\Post,name|min:3|string',
+            'description' => 'min:4|max:2000|string',
             'img' => 'mimes:jpg,png'   
         ];
     }
