@@ -7,7 +7,7 @@
     <div style="padding-top: 20px;">
        <form action="{{route("article.update")}}" method="post" enctype='multipart/form-data'>
                 @csrf
-                 @method('DELETE')
+
                 <div style="padding-top: 20px;">
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="name">Название</span>
@@ -18,7 +18,7 @@
                         <button class="btn btn-primary">Изменить</button>
                     </div>
                 </div>
-        </form>  
+        </form>
        <form action="{{route("article.update")}}" method="post" enctype='multipart/form-data'>
                 @csrf
                 <div style="padding-top: 20px;">
@@ -31,7 +31,7 @@
                     </div>
                 </div>
                 <input type="hidden" name="post_id" id="post_id" value="{{ $postId }}" />
-        </form>  
+        </form>
        <form action="{{route("article.update")}}" method="post" enctype='multipart/form-data'>
                 @csrf
                 <div style="padding-top: 20px;">
@@ -46,7 +46,7 @@
                     </div>
                 </div>
                 <input type="hidden" name="post_id" id="post_id" value="{{ $postId }}" />
-        </form>  
+        </form>
         <form action="{{route("article.update")}}" method="post" enctype='multipart/form-data'>
                 @csrf
                 <div style="padding-top: 20px;">
@@ -62,7 +62,7 @@
                     </div>
                 </div>
                 <input type="hidden" name="post_id" id="post_id" value="{{ $postId }}" />
-        </form>  
+        </form>
     </div>
 </div>
 @if ($errors->any())
@@ -73,7 +73,7 @@
             @endforeach
         </ul>
     </div>
-@endif 
+@endif
 @endsection
 
 

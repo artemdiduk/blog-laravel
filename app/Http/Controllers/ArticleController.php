@@ -67,8 +67,8 @@ class ArticleController extends Controller
 
     public function updateStore(Request $request, Post $post, Group $group)
     {
-        $post = $post->where(['slag' => $request->query('article')])->first();
-        if ($post && $post->user_id == Auth::id()) {
+        $post = $post->where(['id' => $request->query('post_id')])->first();
+
             return view('pages.article-update', [
                 'postName' => $post->name,
                 'postId' => $post->id,
@@ -78,8 +78,7 @@ class ArticleController extends Controller
                 'groups' => $group->all(),
                 'thisGroup' => $group->where(['id' => $post->group_id])->first(),
             ]);
-        }
-        return abort(404);
+
     }
     public function update(UpdateRequestArticle $request, Post $post, Group $group, RequestInputCahange $update)
     {
@@ -100,6 +99,7 @@ class ArticleController extends Controller
 
     public function delate(Post $post, Request $request, Group $group)
     {
+
         if ($postSearch = ($post->where(['id' => $request->input("post_id")])->first())) {
             $group = $group->where(['id' => $postSearch->group_id])->first();
             $postSearch->delete();
