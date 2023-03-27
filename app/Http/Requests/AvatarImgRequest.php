@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateRequestArticle extends FormRequest
+class AvatarImgRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +24,7 @@ class UpdateRequestArticle extends FormRequest
     public function rules()
     {
         return [
-            'group' => 'exists:App\Models\Group,id',
-            'name' => 'unique:App\Models\Post,name|min:3|string',
-            'description' => 'min:4|max:2000|string',
-            'img' => 'mimes:jpg,png'
+            'img' => 'dimensions:min_width=100,min_height=200'
         ];
     }
 }

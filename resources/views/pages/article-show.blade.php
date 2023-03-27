@@ -34,7 +34,7 @@
             </div>
             @if ($postImg)
             <div class="col-12">
-                <img style="width: 100%" src="/storage/img/posts/{{$postImg}}" alt="{{ $postName }}">
+                <img  style="width: 100%" src="/storage/img/posts/{{$postImg}}" alt="{{ $postName }}">
             </div>
             @endif
         </div>

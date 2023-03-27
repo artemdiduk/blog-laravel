@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AvatarImgRequest;
+use App\Models\Group;
 use App\Models\User;
+use App\Services\Interfaces\SaveFile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,9 +16,31 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    protected $images;
+
+    public function __construct(SaveFile $images)
+    {
+        $this->images = $images;
+
+    }
+
     public function index()
     {
-        //
+
+        $userGroup = Auth::user()->group()->get();
+
+        $post = Group::with(['posts' => function ($query) {
+            $query->where('user_id', Auth::id());
+        }])->whereHas('posts', function ($query) {
+            $query->where('user_id', Auth::id());
+        })->get();
+
+        return view('pages.profile',
+            ['user' => Auth::user(),
+                'userGroup' => $userGroup,
+                'postsCreator' => $post
+            ]
+        );
     }
 
     /**
@@ -31,7 +56,7 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -42,7 +67,7 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\User  $user
+     * @param \App\Models\User $user
      * @return \Illuminate\Http\Response
      */
     public function show(User $user)
@@ -53,7 +78,7 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\User  $user
+     * @param \App\Models\User $user
      * @return \Illuminate\Http\Response
      */
     public function edit(User $user)
@@ -64,19 +89,20 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\User  $user
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\User $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(AvatarImgRequest $request, User $user)
     {
-        //
+       $this->images->save($user, $request->img);
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\User  $user
+     * @param \App\Models\User $user
      * @return \Illuminate\Http\Response
      */
     public function destroy(User $user)

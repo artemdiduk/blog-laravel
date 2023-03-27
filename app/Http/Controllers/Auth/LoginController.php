@@ -16,12 +16,13 @@ class LoginController extends Controller
                 return redirect()->intended('admin');
             }
             return redirect()->intended('account');
-        }   
-
-       
+        }
+        return redirect(route('login'))->withErrors([
+            'number' => 'Авторизоваться не удалось'
+        ]);
     }
     public function show() {
-        
+
         return view('pages.auth.login');
     }
 }

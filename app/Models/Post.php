@@ -15,7 +15,8 @@ class Post extends Model
         'img',
         'group_id',
         'slag',
-        'user_id'
+        'user_id',
+        'slag_group'
     ];
     public function groups() {
         return $this->belongsTo(Group::class);

@@ -21,6 +21,7 @@ class ArticleController extends Controller
     {
         $this->images = $images;
     }
+
     public function read(Group $group, Request $req)
     {
 
@@ -37,12 +38,14 @@ class ArticleController extends Controller
     public function create(Post $post, CreatorRequestArticle $requests, Group $group)
     {
         $group = $group->where(['slag' => $requests->group])->first();
+
         $post = $post->create([
             'name' => $requests->name,
             'slag' => Str::slug($requests->name),
-            'description' => $requests->description,
+            'description' => "$requests->description",
             'group_id' => $group->id,
             'user_id' => Auth::id(),
+            'slag_group' => $group->slag,
         ]);
         $this->images->save($post, $requests->file('imag'));
         return redirect("$group->slag/$post->slag")->with('status', 'Post created!');
@@ -69,32 +72,41 @@ class ArticleController extends Controller
     {
         $post = $post->where(['id' => $request->query('post_id')])->first();
 
-            return view('pages.article-update', [
-                'postName' => $post->name,
-                'postId' => $post->id,
-                'postSlag' => $post->slag,
-                "postDescription" => $post->description,
-                'postImg' => $post->img,
-                'groups' => $group->all(),
-                'thisGroup' => $group->where(['id' => $post->group_id])->first(),
-            ]);
+        return view('pages.article-update', [
+            'postName' => $post->name,
+            'postId' => $post->id,
+            'postSlag' => $post->slag,
+            "postDescription" => $post->description,
+            'postImg' => $post->img,
+            'groups' => $group->all(),
+            'thisGroup' => $group->where(['id' => $post->group_id])->first(),
+            'post' => $post
+        ]);
 
     }
-    public function update(UpdateRequestArticle $request, Post $post, Group $group, RequestInputCahange $update)
+
+    public function update(UpdateRequestArticle $request, Post $post, Group $group)
     {
 
-        if ($postSearch = ($post->where(['id' => $request->post_id])->first())) {
-            $groupSearch = $group->where(['slag' => $request->group])->first();
-            $update->updateRequestInputText($postSearch, $request->name, ['name' => $request->name, 'slag' => Str::slug($request->name)]);
-            $update->updateRequestInputText($postSearch, $request->description, ['description' => $request->description]);
-            if ($request->group) {
-                $update->updateRequestInputText($postSearch, $request->group, ['group_id' => $groupSearch->id]);
-            }
-            if ($request->img) {
-                $this->images->save($postSearch, $request->img);
-            }
-            return $update->toArticle($group->where(['id' => $postSearch->group_id])->first(), $post->where(['id' => $request->post_id])->first());
+        if ($request->name) {
+            $slag = Str::slug($request->name);
+            $post->update(['name' => $request->name, 'slag' => $slag ]);
+            return redirect("$post->slag_group/$slag ")->with('status', 'Post created!');
         }
+        if ($request->description) {
+            $post->update(['description' => $request->description]);
+        }
+        if ($request->group) {
+            $id = (int)$request->group;
+            $groupSlag = $group->where(['id' => $id])->first('slag');
+            $post->update(['group_id' => $id, 'slag_group' => $groupSlag->slag]);
+            return redirect("$groupSlag->slag/$post->slag")->with('status', 'Post created!');
+        }
+        if ($request->img) {
+            $this->images->save($post, $request->img);
+        }
+        return redirect("$post->slag_group/$post->slag")->with('status', 'Post created!');
+
     }
 
     public function delate(Post $post, Request $request, Group $group)

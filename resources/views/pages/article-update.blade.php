@@ -5,7 +5,7 @@
 @section('content')
 <div class="container">
     <div style="padding-top: 20px;">
-       <form action="{{route("article.update")}}" method="post" enctype='multipart/form-data'>
+       <form action="{{route("article.update", $post)}}" method="post" enctype='multipart/form-data'>
                 @csrf
 
                 <div style="padding-top: 20px;">
@@ -19,7 +19,7 @@
                     </div>
                 </div>
         </form>
-       <form action="{{route("article.update")}}" method="post" enctype='multipart/form-data'>
+       <form action="{{route("article.update", $post)}}" method="post" enctype='multipart/form-data'>
                 @csrf
                 <div style="padding-top: 20px;">
                     <div class="input-group mb-3">
@@ -32,7 +32,7 @@
                 </div>
                 <input type="hidden" name="post_id" id="post_id" value="{{ $postId }}" />
         </form>
-       <form action="{{route("article.update")}}" method="post" enctype='multipart/form-data'>
+       <form action="{{route("article.update", $post)}}" method="post" enctype='multipart/form-data'>
                 @csrf
                 <div style="padding-top: 20px;">
                     <div class="input-group mb-3">
@@ -47,13 +47,13 @@
                 </div>
                 <input type="hidden" name="post_id" id="post_id" value="{{ $postId }}" />
         </form>
-        <form action="{{route("article.update")}}" method="post" enctype='multipart/form-data'>
+        <form action="{{route("article.update", $post)}}" method="post" enctype='multipart/form-data'>
                 @csrf
                 <div style="padding-top: 20px;">
                     <div class="input-group mb-3">
                     <select name="group" id="pet-select">
                         @foreach ($groups as $group)
-                            <option value="{{$group->slag}}">{{$group->name}}</option>
+                            <option value="{{$group->id}}">{{$group->name}}</option>
                         @endforeach
                     </select>
                     </div>
