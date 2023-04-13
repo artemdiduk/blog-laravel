@@ -4,29 +4,23 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Group;
-use App\Models\User;
-use App\Models\Comment;
-class Post extends Model
+
+class Comment extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name',
         'description',
         'img',
-        'group_id',
-        'slag',
+        'post_id',
         'user_id',
-        'slag_group'
+        'active'
+
     ];
-    public function groups() {
-        return $this->belongsTo(Group::class);
-    }
     public function users()
     {
         return $this->belongsTo(User::class);
     }
-    public  function comments() {
-        return $this->hasMany(Comment::class);
+    public function posts() {
+        return $this->belongsTo(Post::class);
     }
 }

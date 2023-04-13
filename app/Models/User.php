@@ -10,6 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 use App\Models\Role;
 use App\Models\Group;
 use App\Models\Post;
+use App\Models\Comment;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -50,7 +51,7 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Role::class,'user_roles', 'user_id', 'role_id');
     }
-    
+
     public function posts() {
       return $this->hasMany(Post::class);
 
@@ -59,6 +60,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Group::class);
     }
-    
-    
+
+    public  function  comments() {
+        return $this->hasMany(Comment::class);
+    }
+
+
 }

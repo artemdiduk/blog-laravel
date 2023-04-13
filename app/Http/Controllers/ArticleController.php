@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use App\Models\Group;
 use App\Http\Requests\CreatorRequestArticle;
@@ -51,9 +52,20 @@ class ArticleController extends Controller
         return redirect("$group->slag/$post->slag")->with('status', 'Post created!');
     }
 
-    public function show(Group $group, Post $post, Request $request, User $user)
+    public function show(Group $group, Post $post, Request $request, User $user, Comment $comments)
     {
         $post = $post->where(['slag' => Str::afterLast($request->path(), '/')])->first();
+
+        $comments = $user->with(['comments' => function($query) use ($post) {
+            $query->where(['post_id' => $post->id, 'active' => 1])->get();
+        }])->whereHas('comments')->get();
+        $comments = $comments->filter(function ($user) {
+            if($user->comments->isNotEmpty()) {
+                $comments = $user;
+                return $comments;
+            }
+        });
+
         if ($post) {
             return view('pages.article-show', [
                 'postName' => $post->name,
@@ -63,7 +75,9 @@ class ArticleController extends Controller
                 'postImg' => $post->img,
                 'author' => $user->where(['id' => $post->user_id])->first(),
                 'groups' => $group->all(),
+                'post' => $post,
                 'thisGroup' => $group->where(['id' => $post->group_id])->first(),
+                'comments' => $comments,
             ]);
         }
     }

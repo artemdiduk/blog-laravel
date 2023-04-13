@@ -12,7 +12,7 @@
                     <a class="nav-link" href="{{route('admin.users')}}">Юзери</a>
                 </li>
               <li class="nav-item">
-                    <a class="nav-link" href="{{route('registration')}}">Коментарии</a>
+                    <a class="nav-link" href="{{route('admin.comments')}}">Коментарии</a>
             </li>
 
             </ul>

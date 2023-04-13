@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\RegisrationController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CommentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,6 +30,11 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::post('/update/group/{groupUpdate}', [AdminController::class, 'updateGroup'])->name('update.group');
     Route::get('/users/', [AdminController::class, 'users'])->name('admin.users');
     Route::get('/account/users/{user}', [AdminController::class, 'showUser'])->name('admin.account.users');
+    Route::get('/comments', [CommentController::class, 'index'])->name('admin.comments');
+    Route::get('/comments/{user}', [CommentController::class, 'commentsJson'])->name('admin.comments.user');
+    Route::get('/comments/show/{postId}', [CommentController::class, 'show'])->name('admin.comments.show');
+    Route::post('/comments/approved/{comment}', [CommentController::class, 'approved'])->name('admin.comments.approved');
+    Route::delete('/comments/delete/{comment}', [CommentController::class, 'destroy'])->name('admin.comments.delete');
 });
 
 Route::group(['prefix' => 'group'], function () {
@@ -49,7 +55,13 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth'], function () {
     Route::post('update/{user}', [UserController::class, 'update'])->name('user.update');
 });
 
-Route::get('{groupSlag}/{articleId}', [ArticleController::class, 'show'])->name('article');
+Route::group(['prefix' => 'comment', 'middleware' => 'auth'], function () {
+    Route::post('/{user}/{post}', [CommentController::class, 'store'])->name('comment.store');
+});
+
+
+
+Route::get('{groupSlag}/{article}', [ArticleController::class, 'show'])->name('article');
 
 Route::get('login', [LoginController::class, 'show'])->name('login');
 Route::get('registration', [RegisrationController::class, 'show'])->name('registration');

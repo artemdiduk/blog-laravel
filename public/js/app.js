@@ -4803,6 +4803,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;function _typeof
   \******************************/
 /***/ (() => {
 
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 document.addEventListener('DOMContentLoaded', function () {
   var btnFormActive = document.querySelector(".btn.btn-primary.create");
   var form = document.getElementById("exampleModal");
@@ -4817,6 +4818,132 @@ document.addEventListener('DOMContentLoaded', function () {
     btnClose.addEventListener("click", function () {
       form.classList.remove("show");
       form.style.display = "none";
+    });
+  }
+});
+document.addEventListener('DOMContentLoaded', function () {
+  var button = document.querySelector('.form__comment button');
+  var box = document.querySelector('.alert');
+  if (button) {
+    button.addEventListener("click", function (even) {
+      even.preventDefault();
+      var text = document.querySelector('textarea[name="text"]');
+      var img = document.querySelector('input[name="img"]');
+      var formData = new FormData();
+      formData.append('text', text.value);
+      if (img.files[0]) {
+        formData.append('img', img.files[0]);
+      }
+      fetch(routeFormComment, {
+        method: "POST",
+        body: formData,
+        headers: {
+          'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        }
+      }).then(function (data) {
+        return data.json();
+      }).then(function (data2) {
+        box.innerHTML = "";
+        if (data2["success"]) {
+          box.className = "alert alert-success";
+          return box.innerHTML = "<p>".concat(data2["success"], "</p>");
+        }
+        for (var property in data2) {
+          if (_typeof(data2[property]) === "object") {
+            box.className = "alert alert-danger";
+            for (var error in data2[property]) {
+              data2[property][error].forEach(function (item) {
+                box.innerHTML += "<li>".concat(item, "</li>");
+              });
+            }
+          }
+        }
+      });
+      text.value = "";
+      text.innerHTML = "";
+      img.value = '';
+    });
+  }
+});
+document.addEventListener('DOMContentLoaded', function () {
+  var deleteCommentButton = document.querySelectorAll('.form__comment-delete button');
+  var commentsAuthor = document.querySelectorAll('.comments-author');
+  commentAdminAjaxDelate(deleteCommentButton);
+  function commentAdminAjaxDelate(buttonElement) {
+    buttonElement.forEach(function (button, index) {
+      button.addEventListener('click', function (event) {
+        event.preventDefault();
+        var route = button.getAttribute("data-route");
+        var routeShowPost = button.getAttribute("data-idPost");
+        fetch(route, {
+          method: "DELETE",
+          headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+          }
+        }).then(function (data) {
+          return data.json();
+        }).then(function (data2) {
+          commentsAuthor[index].style.display = "none";
+          fetch(routeShowPost, {
+            method: "GET",
+            headers: {
+              'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            }
+          }).then(function (data) {
+            return data.json();
+          }).then(function (data2) {
+            if (data2['post_id']) {
+              var data_id = data2['post_id'];
+              var dropdown_content_ths = document.querySelector('.post[data-postId="' + data_id + '"]');
+              dropdown_content_ths.style.display = "none";
+            }
+          });
+        });
+      });
+    });
+  }
+  var approvedCommentButton = document.querySelectorAll('.form__comment-admin button');
+  approvedComment(approvedCommentButton);
+  function approvedComment(button) {
+    button.forEach(function (button, index) {
+      button.addEventListener("click", function (even) {
+        even.preventDefault();
+        var routeFormComment = button.getAttribute("data-route");
+        var routeShowPost = button.getAttribute("data-idPost");
+        var dataForm = button.getAttribute("data-form");
+        var text = document.querySelector("textarea[name=\"text-".concat(dataForm, "\"]"));
+        var img = document.querySelector("input[name=\"img-".concat(dataForm, "\"]"));
+        var formData = new FormData();
+        formData.append('text', text.value);
+        if (img.files[0]) {
+          formData.append('img', img.files[0]);
+        }
+        fetch(routeFormComment, {
+          method: "POST",
+          body: formData,
+          headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+          }
+        }).then(function (data) {
+          return data.json();
+        }).then(function (data2) {
+          commentsAuthor[index].style.display = "none";
+          fetch(routeShowPost, {
+            method: "GET",
+            headers: {
+              'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            }
+          }).then(function (data) {
+            return data.json();
+          }).then(function (data2) {
+            if (data2['post_id']) {
+              var data_id = data2['post_id'];
+              var dropdown_content_ths = document.querySelector('.post[data-postId="' + data_id + '"]');
+              dropdown_content_ths.style.display = "none";
+            }
+          });
+        });
+      });
     });
   }
 });
