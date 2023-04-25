@@ -9,7 +9,6 @@ use App\Models\User;
 class IndexController extends Controller
 {
     public function __invoke() {
-       
         return view('pages.homepage', ['groups' => Group::all()]);
     }
   

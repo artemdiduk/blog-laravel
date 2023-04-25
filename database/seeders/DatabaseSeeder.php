@@ -2,12 +2,13 @@
 
 namespace Database\Seeders;
 
+use App\Models\Post;
 use Illuminate\Database\Seeder;
 use App\Models\User;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Role;
-use Illuminate\Support\Facades\DB;
+use App\Models\Group;
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -17,7 +18,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-//        User::create(['name' => "admin", 'slag' => "admin", 'email' => 'admin@mail.com', 'password' => Hash::make(123456)]);
-//        User::create(['name' => "test", 'slag' => "test", 'email' => 'test@mail.com', 'password' => Hash::make(123456)]);
+        User::factory(3)->create();
+        Group::factory(3)->create();
+        Post::factory(3)->create();
+        if (!($role = Role::where("name", 'admin')->first())) {
+            Role::create(['name' => "admin", 'slag' => 'admin']);
+            User::create(['name' => "admin", 'slag' => "admin", 'email' => 'admin@mail.com', 'password' => Hash::make(123456)]);
+            $user = User::where("name", 'admin')->first();
+            $user->roles()->attach($role);
+        }
     }
 }
