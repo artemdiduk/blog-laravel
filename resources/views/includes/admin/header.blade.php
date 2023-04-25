@@ -3,16 +3,16 @@
         <div class="" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('index')}}">Главная стрнаница</a>
+                    <a class="nav-link" href="{{route('index')}}">Головна сторінка</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('index.admin')}}">Админка</a>
+                    <a class="nav-link" href="{{route('index.admin')}}">Адмінка</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('admin.users')}}">Юзери</a>
+                    <a class="nav-link" href="{{route('admin.users')}}">Користувачі</a>
                 </li>
               <li class="nav-item">
-                    <a class="nav-link" href="{{route('admin.comments')}}">Коментарии</a>
+                    <a class="nav-link" href="{{route('admin.comments')}}">Коментарі</a>
             </li>
 
             </ul>

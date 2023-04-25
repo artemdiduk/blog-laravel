@@ -16,9 +16,9 @@ class AdminController extends Controller
 
     public function show(Post $post, Group $group)
     {
-
+ 
         return view(
-            'pages.admin-homepage',
+            'pages.admin.admin-homepage',
             [
                 'postCount' => $post->count(),
                 'contents' => $group->with('posts')->get()
@@ -26,47 +26,41 @@ class AdminController extends Controller
         );
     }
 
-    public function delateGroup(Group $groupDelate)
-    {
-        $groupDelate->delete();
+    public function delateGroup(Group $group)
+    {   
+        $group->delete();
         return redirect('/admin');
     }
 
-    public function updateGroupCreate(Group $groupUpdateForm)
+    public function updateGroupStore(Group $group)
     {
         return view(
-            'pages.admin-group-update',
+            'pages.admin.admin-group-update',
             [
-                "group" => $groupUpdateForm,
+                "group" => $group,
             ]
         );
     }
 
-    public function updateGroup(Group $groupUpdate, CreatorRequest $request, Post $posts)
+    public function updateGroup(Group $group, CreatorRequest $request, Post $posts)
     {
-        $slug = Str::slug($request->group);
+        $slag = Str::slug($request->group);
         $name = $request->group;
-        $posts->where('group_id', $groupUpdate->id)->update(['slag_group'=>  $slug]);
-        $groupUpdate->update(['name' => $name, 'slag' => $slug]);
-        return redirect("/group/$groupUpdate->slag");
+        $group->update(['name' => $name, 'slag' => $slag]);
+        return redirect("/group/$slag");
     }
 
-    public function users(User $users)
+    public function users(User $users, Group $groups)
     {
         $users = $users->with('group', 'posts')->get();
-
-        $group = new Group();
-
-        return view('pages.admin-users', [
+        return view('pages.admin.admin-users', [
             'users' => $users,
-            'groupAll' => $group->get(),
+            'group' => $groups
         ]);
     }
 
 
-
     public  function  showUser(User $user) {
-
         $userGroup = $user->group()->get();
         $post = Group::with(['posts' => function ($query) use ($user) {
             $query->where('user_id', $user->id);
@@ -74,7 +68,7 @@ class AdminController extends Controller
             $query->where('user_id', $user->id);
         })->get();
 
-        return view('pages.profile',
+        return view('pages.admin.profile',
             ['user' => $user,
                 'userGroup' => $userGroup,
                 'postsCreator' => $post

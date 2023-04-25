@@ -18,7 +18,7 @@ class LoginController extends Controller
             return redirect()->intended('account');
         }
         return redirect(route('login'))->withErrors([
-            'number' => 'Авторизоваться не удалось'
+            'number' => 'Авторизуватися не вдалося'
         ]);
     }
     public function show() {

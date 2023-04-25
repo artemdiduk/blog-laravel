@@ -3,20 +3,20 @@
         <div class="" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('index')}}">Главная</a>
+                    <a class="nav-link" href="{{route('index')}}">Головна</a>
 
                 </li>
 
                 @if (!Auth::check())
                     <li class="nav-item">
-                    <a class="nav-link" href="{{route('login')}}">Авторизация</a>
+                    <a class="nav-link" href="{{route('login')}}">Авторизація</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('registration')}}">Регистрация</a>
+                    <a class="nav-link" href="{{route('registration')}}">Реєстрація</a>
                 </li>
                 @else
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('account')}}">Профиль</a>
+                        <a class="nav-link" href="{{route('account')}}">Профіль</a>
                     </li>
                 @endif
 

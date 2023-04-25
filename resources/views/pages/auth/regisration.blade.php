@@ -8,9 +8,9 @@
         <div class="row justify-content-center">
             <form action="{{route('register')}}" class="col-md-7 border" method="POST"  enctype="multipart/form-data">
                 @csrf
-                <h3>Регистрация</h3>
+                <h3>Реєстрація</h3>
                <div class="form-group">
-                    <label for="name" class="col-form-label">Имя</label>
+                    <label for="name" class="col-form-label">Ім'я</label>
                     <input type="text" required name="name" class="form-control" id="name">
                 </div>
                 <div class="form-group">
@@ -22,7 +22,7 @@
                     <input type="text" required name="password" class="form-control" id="password">
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn-primary btn">Зарегистрироваться</button>
+                    <button type="submit" class="btn-primary btn">Зареєструватись</button>
                 </div>
             </form>
         </div>

@@ -1,6 +1,6 @@
 @extends('./base')
-@section('group')
-    home page
+@section('title')
+    Тема статей {{ $group->name }}
 @endsection
 @section('content')
 <div class="container">
@@ -8,19 +8,19 @@
         @if (Auth::check())
         <div class="row justify-content-end">
             <div class="col-md-2">
-                <a class="btn btn-primary" href="{{route('article.create.form',  ['group' => $groupSlag])}}">Написать статью</a>
+                <a class="btn btn-primary" href="{{route('article.create.form', $group)}}">Написать статью</a>
             </div>
         </div>
         @endif
         <div class="col-md-12">
-            <h3 class="display-5">Тема статей {{ $groupName }}</h3>
+            <h3 class="display-5">Тема статей {{ $group->name }}</h3>
         </div>
         @foreach ($posts as $post)
             @if ($post)
             <div class="col-md-12 border-bottom">
                 <div class="row">
-                    <div class="col-4">
-                        <a href="/{{$groupSlag}}/{{$post->slag}}">{{$post->name}}</a>
+                    <div >
+                        <a href="{{route("article", [$group, $post])}}">{{$post->name}}</a>
                     </div>
                 </div>
             </div>

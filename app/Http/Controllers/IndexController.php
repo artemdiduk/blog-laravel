@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 class IndexController extends Controller
 {
-    public function show() {
-        
+    public function __invoke() {
+       
         return view('pages.homepage', ['groups' => Group::all()]);
     }
   

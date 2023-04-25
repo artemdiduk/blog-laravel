@@ -7,6 +7,7 @@ use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 class AuthorCreator
 {
     /**
@@ -18,10 +19,8 @@ class AuthorCreator
      */
     public function handle(Request $request, Closure $next)
     {
-
-        $post = new Post();
-        $post = $post->where(['id' => $request->post_id])->first();
-
+       
+        $post = (new Post())->find(Str::afterLast($request->path(), '/'));
         if ($post->user_id == Auth::id() || ( isset(Auth::user()->roles) && Auth::user()->roles->first()->slag == 'admin') ) {
             return $next($request);
         }

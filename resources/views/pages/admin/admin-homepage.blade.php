@@ -5,9 +5,9 @@
 @section('content')
   <div class="container">
     <div style="padding-top: 20px;">
-       <h1>Контент на сайте</h1>
+       <h1>Контент на сайті</h1>
         <div class="wrapper">
-            <h2>Всех постов {{ $postCount }}</h2>
+            <h2>Усіх постів {{ $postCount }}</h2>
         </div>
 
     </div>
@@ -23,21 +23,20 @@
                     </div>
                 </form>
                 <div class="col-md-2" style="padding-left: 0px; margin-top: 10px">
-                    <a href="{{route('update.group.from', $content)}}" class="btn btn-primary create">Изменить групу</a>
+                    <a href="{{route('update.group.from', $content)}}" class="btn btn-primary create">Змінити групу</a>
                 </div>
                 <div class="wrapper__posts">
                     @foreach ($content->posts as $post)
                         <h3>Пост <a href="{{$content->slag}}/{{ $post->slag }}">{{ $post->name }}</a></h3>
                         <div class="col-md-2" style="padding-left: 0px">
-                            <a href="{{route('article.update.form', ['post_id' => $post->id])}}" class="btn btn-primary create" data-toggle="modal" data-target="#exampleModal">Изменить саттю</a>
+                            <a href="{{route('article.update.form', $post)}}" class="btn btn-primary create">Змінити саттю</a>
                         </div>
-                        <form action="{{route("article.delate")}}" method="post" enctype='multipart/form-data'>
+                        <form action="{{route("article.delate", $post)}}" method="post" enctype='multipart/form-data'>
                             @csrf
                             @method("DELETE")
                             <div style="padding-top: 20px;">
                                 <div class="input-group mb-3">
-                                    <input type="hidden" name="post_id" id="post_id" value="{{ $post->id }}" />
-                                    <button class="btn btn-primary">Удалить пост</button>
+                                    <button class="btn btn-primary">Видалити пост</button>
                                 </div>
                             </div>
                         </form>

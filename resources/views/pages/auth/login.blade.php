@@ -1,6 +1,6 @@
 @extends('./base')
 @section('title')
-    login
+    Авторизацiя
 @endsection
 @section('content')
   <div class="container">
@@ -8,7 +8,7 @@
         <div class="row justify-content-center">
             <form action="{{route('authenticate')}}" class="col-md-7 border" method="POST"  enctype="multipart/form-data">
                 @csrf
-                <h3>Авторизация</h3>
+                <h3>Авторизацiя</h3>
                 <div class="form-group">
                     <label for="email" class="col-form-label">Email</label>
                     <input type="text" required name="email" class="form-control" id="email">
@@ -18,7 +18,7 @@
                     <input type="text" required name="password" class="form-control" id="password">
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn-primary btn">Войти</button>
+                    <button type="submit" class="btn-primary btn">Увійти</button>
                 </div>
             </form>
         </div>

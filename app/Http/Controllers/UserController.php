@@ -24,21 +24,26 @@ class UserController extends Controller
 
     }
 
-    public function index()
+    public function index(Group $groups)
     {
 
         $userGroup = Auth::user()->group()->get();
-
+        
         $post = Group::with(['posts' => function ($query) {
             $query->where('user_id', Auth::id());
         }])->whereHas('posts', function ($query) {
             $query->where('user_id', Auth::id());
         })->get();
 
-        return view('pages.profile',
+
+
+        return view(
+            'pages.profile.profile',
             ['user' => Auth::user(),
                 'userGroup' => $userGroup,
-                'postsCreator' => $post
+                'postsCreator' => $post,
+                'groups' => $groups,
+                'postLikes' => Auth::user()->likedPost()->get(),
             ]
         );
     }

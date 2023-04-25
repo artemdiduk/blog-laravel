@@ -24,7 +24,7 @@ class CreatorRequestArticle extends FormRequest
     public function rules()
     {
         return [
-            'group' => 'exists:App\Models\Group,slag|required',
+            'group' => 'exists:App\Models\Group,id|required',
             'name' => 'unique:App\Models\Post,name|required|min:3|string',
             'description' => 'required|min:4|max:2000|string',
             'img' => 'mimes:jpg,png'   

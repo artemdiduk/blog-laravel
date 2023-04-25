@@ -24,7 +24,7 @@ class CommentController extends Controller
         $this->img = $img;
     }
 
-    public function index(Comment $comment, User $users)
+    public function index(User $users)
     {
 
         $posts = Post::with(['comments' => function ($query) {
@@ -33,7 +33,7 @@ class CommentController extends Controller
             $query->where("active", 0);
         })->get();
 
-        return view('pages.admin-comment', [
+        return view('pages.admin.admin-comment', [
             'users' => $users,
             'posts' => $posts,
         ]);
@@ -48,13 +48,6 @@ class CommentController extends Controller
     {
         //
     }
-
-    public function commentsJson(User $user)
-    {
-        $user = $user->comments()->where(['active' => 0])->get();
-        return response()->json($user->count());
-    }
-
 
     /**
      * Store a newly created resource in storage.
@@ -71,24 +64,7 @@ class CommentController extends Controller
             'user_id' => $user->id,
         ]);
         $this->img->save($comment, $request->img);
-        return response()->json(['success' => 'Комментарий передан на утверждение админа']);
-
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param \App\Models\Comment $comment
-     * @return \Illuminate\Http\Response
-     */
-    public function show($postId)
-    {
-        $comments = Comment::where(['post_id' => $postId, 'active' => 0])->get();
-           if($comments->count() == 0) {
-               return response()->json(['post_id' => $postId]);
-           }
-        return response()->json([true]);
-
+        return response()->json(['success' => 'Коментар передано на затвердження адміну']);
     }
 
     /**
@@ -123,14 +99,14 @@ class CommentController extends Controller
     public function destroy(Comment $comment)
     {
         $comment->delete();
-        return response()->json(['success' => 'Удаление успешно']);
+        return redirect()->back();
     }
 
-    public function approved(CommentRequest $request, Comment $comment)
+    public function approved(Comment $comment, CommentRequest $request)
     {
-
         $comment->update(['description' => $request->text, 'active' => 1]);
         $this->img->save($comment, $request->img);
-        return response()->json(['success' => 'успешно']);
+        return response()->json(['success' => 'ok']);
+       
     }
 }

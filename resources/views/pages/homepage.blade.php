@@ -8,7 +8,7 @@
         <div class="row justify-content-end">
             @if (Auth::check())
                 <div class="col-md-2">
-                <button class="btn btn-primary create" data-toggle="modal" data-target="#exampleModal">Создать тему</button>
+                <button class="btn btn-primary create" data-toggle="modal" data-target="#exampleModal">Створити тему</button>
             </div>
             @endif
         </div>
@@ -16,7 +16,7 @@
         @foreach ($groups as $group)
             <div class="row">
                 <div class="col-4">
-                    <a href="group/{{$group->slag}}">{{$group->name}}</a>
+                    <a href="{{route("group", $group)}}">{{$group->name}}</a>
                 </div>
             </div>
         @endforeach

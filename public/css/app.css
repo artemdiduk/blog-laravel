@@ -8982,8 +8982,16 @@ button:hover, button:focus {
   box-shadow: none !important;
 }
 
-h1, h2, h3, h4, h5,
-.h1, .h2, .h3, .h4, .h5 {
+h1,
+h2,
+h3,
+h4,
+h5,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5 {
   line-height: 1.5;
   font-weight: 400;
   font-family: "Poppins", Arial, sans-serif;
@@ -9208,19 +9216,63 @@ a[data-toggle=collapse] {
 .form-control:focus, .form-control:active {
   border-color: #000;
 }
-.form-control::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+.form-control::-webkit-input-placeholder {
+  /* Chrome/Opera/Safari */
   color: rgba(255, 255, 255, 0.5);
 }
-.form-control::-moz-placeholder { /* Firefox 19+ */
+.form-control::-moz-placeholder {
+  /* Firefox 19+ */
   color: rgba(255, 255, 255, 0.5);
 }
-.form-control:-ms-input-placeholder { /* IE 10+ */
+.form-control:-ms-input-placeholder {
+  /* IE 10+ */
   color: rgba(255, 255, 255, 0.5);
 }
-.form-control:-moz-placeholder { /* Firefox 18- */
+.form-control:-moz-placeholder {
+  /* Firefox 18- */
   color: rgba(255, 255, 255, 0.5);
 }
 
 .subscribe-form .form-control {
   background: #4897fc;
+}
+
+.like__icon svg {
+  height: 100%;
+  width: 22px;
+}
+
+.wrapper__like {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.like__icon {
+  padding-right: 5px;
+  cursor: pointer;
+}
+
+.wrapper__like span {
+  font-size: 18px;
+  color: #343a40;
+  font-weight: 600;
+}
+
+.like__icon button {
+  background: none;
+  border: none;
+  padding: 0px;
+}
+
+.like__icon button:hover svg {
+  fill: red;
+}
+
+.like__icon.like button svg {
+  fill: red;
+}
+
+.like__icon.like button:hover svg {
+  fill: black;
 }
