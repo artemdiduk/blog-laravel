@@ -8,7 +8,7 @@
         <div style="padding-top: 20px;">
             @if ($user->avatar)
                 <div class="col-12">
-                    <img width="250" height="250" src="/storage/img/users/{{ $user->avatar }}"
+                    <img width="250" height="250" src="{{ asset("/storage/img/users/$user->avatar") }}"
                         alt="avatar {{ $user->name }}">
                 </div>
             @endif

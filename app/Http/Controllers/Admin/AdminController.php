@@ -68,7 +68,7 @@ class AdminController extends Controller
             $query->where('user_id', $user->id);
         })->get();
 
-        return view('pages.admin.profile',
+        return view('pages.profile.profile',
             ['user' => $user,
                 'userGroup' => $userGroup,
                 'postsCreator' => $post

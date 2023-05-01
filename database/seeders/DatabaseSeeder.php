@@ -6,8 +6,8 @@ use App\Models\Post;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use App\Models\Role;
 use App\Models\Group;
+use Database\Seeders\AdminSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -21,11 +21,7 @@ class DatabaseSeeder extends Seeder
         User::factory(3)->create();
         Group::factory(3)->create();
         Post::factory(3)->create();
-        if (!($role = Role::where("name", 'admin')->first())) {
-            Role::create(['name' => "admin", 'slag' => 'admin']);
-            User::create(['name' => "admin", 'slag' => "admin", 'email' => 'admin@mail.com', 'password' => Hash::make(123456)]);
-            $user = User::where("name", 'admin')->first();
-            $user->roles()->attach($role);
-        }
+        $this->call(AdminSeeder::class);
+        
     }
 }
