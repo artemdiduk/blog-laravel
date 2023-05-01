@@ -16,8 +16,6 @@
 
 php artisan migrate:refresh --seed
 
-та додати адміна  php artisan db:seed --class=AdminSeeder
-
 Також потрібно додати посилання на сторедж php artisan storage:link
 Як що ми працюємо через докер потрібно зайти на машину. docker exec -it app bash так вести команду  php artisan storage:link
 Як що зображення не додаються потрібно в env замінити FILESYSTEM_DRIVER=public
